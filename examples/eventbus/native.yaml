@@ -22,3 +22,25 @@ spec:
 #        storageClassName: standard
 #        accessMode: ReadWriteOnce
 #        volumeSize: 10Gi
+
+这段代码定义了一个名为 "default" 的 Argo Events 事件总线。
+
+Argo Events 是一个用于创建和管理事件驱动工作流的框架。它允许您将事件从各种来源（例如，GitHub、Kubernetes、Slack）连接到各种目标（例如，工作流、Webhook、通知），并使用它来构建事件驱动的应用程序。
+
+事件总线是 Argo Events 的核心组件之一，它负责接收和路由事件。它就像一个中间人，将事件从发送方传递到接收方。
+
+代码解释：
+
+apiVersion: argoproj.io/v1alpha1: 指定资源的 API 版本。
+kind: EventBus: 指定资源类型为 "EventBus"。
+metadata:: 定义资源的元数据，包括名称等。
+name: default: 设置事件总线的名称为 "default"。
+spec:: 定义事件总线的配置。
+nats:: 指定事件总线的类型为 NATS。
+native:: 使用 NATS 的原生客户端。
+replicas: 3: 指定 NATS 集群的副本数量为 3。
+auth: token: 指定 NATS 的认证策略为 "token"。
+containerTemplate:, metricsContainerTemplate:, antiAffinity:, persistence:: 这些选项用于配置 NATS 容器的资源限制、反亲和性、持久化存储等。
+总结：
+
+这段代码定义了一个名为 "default" 的 Argo Events 事件总线，它使用 NATS 作为其底层消息代理，并配置了 NATS 集群的副本数量、认证策略等。
